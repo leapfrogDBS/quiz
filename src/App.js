@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+import React from "react"
 import './App.css';
 
+
 function App() {
+  const [questions, setQuestions] = React.useState([])
+
+  React.useEffect(() => {
+    fetch("https://opentdb.com/api.php?amount=5")
+    .then(res => res.json())
+    .then(data => setQuestions(data.results))
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+      <section className="start">
+        <h1 className="startSceeen__title">Quizical</h1>
+        <p className="start__description">Some Description if neeed</p>
+        <button className="start_button">Start Quiz</button>
+      </section>
+
+      <section className="questions">
+          
+      </section>
+
+
     </div>
   );
 }
