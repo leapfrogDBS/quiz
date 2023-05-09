@@ -20,10 +20,9 @@ export default function Question(props) {
                         
     return (
         <div className="question">
-           <h1>Question instance</h1>
-           <p>Question: {he.decode(props.question.question)}</p>
-           <p>Key: {props.question.id}</p>
-           <p>Answer: {props.question.correct_answer}</p>
+           <h2 className="question-text">Question: {he.decode(props.question.question)}</h2>
+           <p style={{display: "none"}}>Key: {props.question.id}</p>
+           <p style={{display: "none"}}>Answer: {props.question.correct_answer}</p>
            <div className="answer-choices">
               {answerChoices.map((choice, index) => (
                 <div className="answer-choice" key={index}>

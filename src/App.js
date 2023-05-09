@@ -16,6 +16,10 @@ function startQuiz() {
     ))
   }
 
+  function checkAnswers() {
+    console.log("Button clicked")
+  }
+
   return (
     <div className="App">
       
@@ -23,13 +27,14 @@ function startQuiz() {
       <section className="start">
         <h1 className="startSceeen__title">Quizical</h1>
         <p className="start__description">Some Description if neeed</p>
-        <button onClick={startQuiz} className="start_button">Start Quiz</button>
+        <button onClick={startQuiz} className="blue_button start_button">Start Quiz</button>
       </section>
       ) : (
       <section className="questions">
         {questions.map((question) =>
           <Question key={question.id} question={question} id={question.id} />
         )}
+        <button onClick={checkAnswers} className="blue_button check_button">Check answers</button>
       </section>
       )}
       
