@@ -33,7 +33,9 @@ p {
   border: none;
   outline: none;
 }
-
+.blue_button:active {
+  box-shadow: inset 0 9px 15px rgba(0, 0, 0, 0.2);
+}
 
 /* Start Screen */
 
@@ -53,9 +55,7 @@ p {
   margin-top: 7px;
   margin-bottom: 0;
 }
-.start_button:active {
-  box-shadow: inset 0 9px 15px rgba(0, 0, 0, 0.2);
-}
+
 
 /* Question */
 .question {
