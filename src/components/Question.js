@@ -1,36 +1,44 @@
 import React from "react"
-import he from 'he';
+import he from 'he'
 
-export default function Question(props) {
-
-    /* const [selectedAnswer, setSelectedAnswer] = React.useState('');
-    const [isCorrect, setIsCorrect] = React.useState(false); */
-    
-    const [answerChoices] = React.useState(() => {
-        const randomIndex = Math.floor(Math.random() * (props.question.incorrect_answers.length + 1));
-        const choices = [...props.question.incorrect_answers]      
-        choices.splice(randomIndex, 0, props.question.correct_answer) 
-        return choices;
-    })
-
-   /* const handleChange = (e) => {
-        setSelectedAnswer(e.target.value);
-        setIsCorrect(e.target.value === props.question.correct_answer) 
-    } */
+export default function Question({ id, question, onAnswerSelect, gameComplete }) { // destructure props
+   
+    function handleChange(e) {
+        onAnswerSelect(id, e.target.value);
+    }
                         
     return (
         <div className="question">
-           <h2 className="question-text">Question: {he.decode(props.question.question)}</h2>
-           <p style={{display: "none"}}>Key: {props.question.id}</p>
-           <p style={{display: "none"}}>Answer: {props.question.correct_answer}</p>
-           <div className="answer-choices">
-              {answerChoices.map((choice, index) => (
-                <div className="answer-choice" key={index}>
-                    <input type="radio" id={`choice-${props.id}-${index}`} name={`${props.id}-answer`} value={he.decode(choice)} /* onChange={handleChange} */ />
-                    <label htmlFor={`choice-${props.id}-${index}`}>{he.decode(choice)}</label>
-                </div>
-              ))}
-           </div>
+            <h2 className="question-text">Question: {he.decode(question.question)}</h2>
+            <p >Key: {question.id}</p>
+            <p >Answer: {question.correct_answer}</p>
+            <div className="answer-choices">
+                {question.answerChoices.map((choice, index) => (
+                    <div className="answer-choice" key={index}>
+                        <input 
+                        type="radio"
+                        id={`choice-${id}-${index}`} 
+                        name={`${id}-answer`} 
+                        value={choice.key} 
+                        onChange={handleChange}
+                        disabled={gameComplete} 
+                        />
+                        <label 
+                            htmlFor={`choice-${id}-${index}`}
+                            className={
+                            gameComplete 
+                            ? (choice.key === question.correctAnswerKey 
+                            ? "correct-answer" 
+                            : (choice.key === question.selectedAnswerKey ? "selected incorrect-answer" : "incorrect-answer")
+                            )
+                            : ""
+                            }
+                        >
+                        {he.decode(choice.answer)}
+                        </label>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }
