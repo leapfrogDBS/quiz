@@ -10,8 +10,8 @@ export default function Question({ id, question, onAnswerSelect, gameComplete })
     return (
         <div className="question">
             <h2 className="question-text">Question: {he.decode(question.question)}</h2>
-            <p >Key: {question.id}</p>
-            <p >Answer: {question.correct_answer}</p>
+            <p stlye={{display: "none"}}>Key: {question.id}</p>
+            <p stlye={{display: "none"}}>Answer: {question.correct_answer}</p>
             <div className="answer-choices">
                 {question.answerChoices.map((choice, index) => (
                     <div className="answer-choice" key={index}>
